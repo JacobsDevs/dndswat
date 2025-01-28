@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Enemy" load_steps=3 format=3 uid="uid://b5irghtdgctpl"]
+
+[ext_resource type="Texture2D" uid="uid://csufghg5jdo30" path="res://Sprites/Tiles/goblin.png" id="1_71ve3"]
+[ext_resource type="Script" path="res://Resources/enemy.gd" id="1_nwlmk"]
+
+[resource]
+script = ExtResource("1_nwlmk")
+name = "Goblin"
+max_hp = 10
+damage_range = [1, 4]
+image = ExtResource("1_71ve3")
