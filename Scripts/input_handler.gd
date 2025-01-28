@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var world: Node2D = $".."
 @onready var tile_map_layer: TileMapLayer = $"../TileMapLayer"
+@onready var character: CharacterBody2D = $"../Character"
 const SELECTOR = preload("res://Scenes/Selector.tscn")
 var inst
 
@@ -13,13 +14,15 @@ func _ready() -> void:
 	add_child(instance)
 
 func _input(event) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
 		var loc = tile_map_layer.local_to_map(event.global_position)
-		print("Coods is " + str(tile_map_layer.local_to_map(event.global_position)))
-		inst.position = tile_map_layer.map_to_local(loc)
-	if event is InputEventMouseButton:
-		if Input.is_action_just_released("left_click"):
-			print("Click")
+		if event is InputEventMouseMotion:
+			print("Coods is " + str(tile_map_layer.local_to_map(event.global_position)))
+			inst.position = tile_map_layer.map_to_local(loc)
+		if event is InputEventMouseButton:
+			if Input.is_action_just_released("left_click"):
+				print("Ok!")
+				character.position = tile_map_layer.map_to_local(loc)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

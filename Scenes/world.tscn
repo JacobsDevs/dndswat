@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://gmdepxlmmfuy"]
+[gd_scene load_steps=9 format=4 uid="uid://gmdepxlmmfuy"]
 
 [ext_resource type="Texture2D" uid="uid://dlo7vwaeme6lc" path="res://Sprites/Tiles/Grass.png" id="1_a16wb"]
 [ext_resource type="Script" path="res://Scripts/tile_map_layer.gd" id="2_0yk47"]
 [ext_resource type="PackedScene" uid="uid://5gfglghifsu0" path="res://Scenes/player.tscn" id="2_7meun"]
 [ext_resource type="Script" path="res://Scripts/input_handler.gd" id="3_4jk2y"]
+[ext_resource type="Script" path="res://Scripts/turn_handler.gd" id="5_khh44"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_em38j"]
 texture = ExtResource("1_a16wb")
@@ -17,6 +18,12 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_em38j")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sdpea"]
+vertices = PackedVector2Array(1142, 630, 10, 630, 10, 10, 1142, 10)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 1152, 0, 1152, 640, 0, 640)])
+cell_size = 32.0
+
 [node name="World" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -25,9 +32,16 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 tile_set = SubResource("TileSet_wat6a")
 script = ExtResource("2_0yk47")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_7meun")]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="TileMapLayer"]
+position = Vector2(-1, -2)
+navigation_polygon = SubResource("NavigationPolygon_sdpea")
+
+[node name="Character" parent="." instance=ExtResource("2_7meun")]
 position = Vector2(80, 80)
 
 [node name="InputHandler" type="Node2D" parent="."]
 position = Vector2(1, 2)
 script = ExtResource("3_4jk2y")
+
+[node name="TurnHandler" type="Node" parent="."]
+script = ExtResource("5_khh44")
