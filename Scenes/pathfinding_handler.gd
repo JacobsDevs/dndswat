@@ -20,13 +20,15 @@ func build_points():
 	for i in tile_map_layer.get_used_cells():
 		var location = tile_map_layer.map_to_local(i)
 		location_dict[location] = true
-		astar.add_point(astar.get_available_point_id(), location, 1)
+		if tile_map_layer.get_cell_source_id(i) == 0:
+			astar.add_point(astar.get_available_point_id(), location, 1)
 	for i in astar.get_point_ids():
 		var point_location = astar.get_point_position(i)
 		for j in directions:
 			if location_dict.has(point_location + j):
-				astar.connect_points(i, astar.get_closest_point(point_location + j))
-				print("Found neighbour" + str(point_location) + "at" + str(point_location + j))
+				var connection_id = tile_map_layer.get_cell_source_id(tile_map_layer.local_to_map(point_location + j))
+				if connection_id == 0:
+					astar.connect_points(i, astar.get_closest_point(point_location + j))
 
 func calculate_destinations(speed: int, position: Vector2):
 	var successful_paths: Array
