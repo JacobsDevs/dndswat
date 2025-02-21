@@ -13,7 +13,7 @@ var available_movement = 3
 func _ready() -> void:
 	var e1 = npc_factory.create_enemy()
 	add_child(e1)
-	e1.position = Vector2(100, 100)
+	e1.position = Vector2(80, 112)
 	actor_list.append(e1)
 	actor_list.append(character)
 	get_next()

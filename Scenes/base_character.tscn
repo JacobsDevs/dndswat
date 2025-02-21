@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://pmjkp7cyejob"]
+
+[ext_resource type="Script" path="res://base_character.gd" id="1_nhdkm"]
+[ext_resource type="Texture2D" uid="uid://csufghg5jdo30" path="res://Sprites/Tiles/goblin.png" id="2_we6p8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sd538"]
+size = Vector2(32, 32)
+
+[sub_resource type="SystemFont" id="SystemFont_uxnyn"]
+font_names = PackedStringArray("Ubuntu")
+subpixel_positioning = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2oyyi"]
+bg_color = Color(0.929297, 0.417378, 0.381279, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ydc6"]
+bg_color = Color(0.400822, 0.689818, 0.154991, 1)
+anti_aliasing = false
+
+[node name="BaseCharacter" type="Node2D"]
+z_index = 2
+script = ExtResource("1_nhdkm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_we6p8")
+offset = Vector2(1, 4)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_sd538")
+
+[node name="Name Label" type="Label" parent="."]
+visible = false
+offset_left = -19.0
+offset_top = -38.0
+offset_right = 19.0
+offset_bottom = -21.0
+theme_override_fonts/font = SubResource("SystemFont_uxnyn")
+theme_override_font_sizes/font_size = 12
+text = "Goblin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Health Bar" type="ProgressBar" parent="."]
+visible = false
+offset_left = -8.0
+offset_top = -21.0
+offset_right = 8.0
+offset_bottom = -18.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2oyyi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8ydc6")
+value = 50.0
+show_percentage = false
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

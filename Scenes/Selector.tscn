@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dldwfq41gnyah"]
+[gd_scene load_steps=3 format=3 uid="uid://dldwfq41gnyah"]
 
-[ext_resource type="Texture2D" uid="uid://dhse0xidv8jj2" path="res://Sprites/Tiles/Selector.png" id="1_jaw84"]
+[ext_resource type="Script" path="res://Scripts/selector.gd" id="1_733fa"]
+[ext_resource type="Texture2D" uid="uid://cq1ygd3kmuwm7" path="res://Sprites/Tiles/Block green.png" id="2_75s4j"]
 
 [node name="Selector" type="Node2D"]
+script = ExtResource("1_733fa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 2
-texture = ExtResource("1_jaw84")
+z_index = 1
+texture = ExtResource("2_75s4j")

@@ -3,6 +3,7 @@ extends Node
 
 @onready var combatant = preload('res://Scenes/combatant.tscn')
 @onready var data: Resource = preload("res://Resources/Goblin.tres")
+@onready var base_character = preload("res://Scenes/base_character.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
@@ -12,7 +13,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
-func create_enemy() -> Combatant:
-	var enemy: Combatant = combatant.instantiate()
+func create_enemy() -> BaseCharacter:
+	var enemy: BaseCharacter = base_character.instantiate()
 	enemy.setup(data)
 	return enemy
